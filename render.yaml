@@ -1,0 +1,19 @@
+# Exported from Render on 2025-03-27T23:44:36Z
+services:
+- type: web
+  name: st_travel
+  runtime: node
+  repo: https://github.com/sergio-sanguinetti/st_travel_backend
+  plan: free
+  region: oregon
+  buildCommand: npm install
+  startCommand: node server/server.js
+  preDeployCommand: "mkdir -p /mnt/data/fotos_tour" 
+  buildFilter:
+    ignoredPaths:
+    - src/**
+    - static/src/**
+    - src/fotos_galeria/**
+    - fotos_galeria/**
+    - src/scr/**
+version: "1"

@@ -1,0 +1,14 @@
+# Ignorar la carpeta fotos_galeria dentro de src
+src/fotos_galeria/
+
+#node_modules
+node_modules/
+
+#variables de entorno
+.env
+
+
+*.log
+.DS_Store
+npm-debug.log*
+.env.*

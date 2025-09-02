@@ -1,0 +1,44 @@
+{
+  "name": "sst_travel",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server/server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server/server.js",
+    "dev": "nodemon server/server.js",
+    "postinstall": "npm rebuild bcrypt --build-from-source"
+  },
+  "engines": {
+    "node": "18.x"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "aws-sdk": "^2.1692.0",
+    "axios": "^1.7.9",
+    "body-parser": "^1.20.2",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.1",
+    "dropbox": "^10.34.0",
+    "express": "^4.18.2",
+    "express-fileupload": "^1.5.1",
+    "helmet": "^6.1.5",
+    "isomorphic-fetch": "^3.0.0",
+    "jsonwebtoken": "^9.0.0",
+    "moment-timezone": "^0.5.46",
+    "mongoose": "^5.9.5",
+    "mongoose-unique-validator": "^2.0.3",
+    "multer": "^1.4.5-lts.1",
+    "mysql2": "^3.12.0",
+    "shortid": "^2.2.16",
+    "soap": "^1.1.7",
+    "stripe": "^17.4.0",
+    "uuid": "^11.1.0",
+    "xlsx": "^0.18.5",
+    "xml2js": "^0.6.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  }
+}
