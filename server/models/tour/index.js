@@ -143,35 +143,38 @@ async function obtenerTourPublicados(publicados, limit, offset) {
         //      ;
         // `;
 
-      const queryTours = `
+        const queryTours = `
             SELECT 
-              t.*,
-              fotos_tour.fotos_galeria,
-              fotos_tour.foto_principal,
-              hoteles_tour.hoteles,
-              GROUP_CONCAT(
-                  DISTINCT CASE 
-                      WHEN filtros.filtro = 'Prioridad' THEN filtros.valor 
-                      ELSE filtros.filtro 
-                  END 
-                  ORDER BY filtros.filtro ASC
-              ) AS filtros
-          FROM 
-              tours t
-          LEFT JOIN 
-              fotos_tour ON t.id_tour = fotos_tour.id_tour
-          LEFT JOIN 
-              hoteles_tour ON t.id_tour = hoteles_tour.id_tour
-          LEFT JOIN 
-              filtros ON t.id_tour = filtros.id_tour
-          WHERE t.publicado = 1 AND t.mas_barato = 1 
-          GROUP BY 
-              t.id_tour;`;
-            
+                t.*,
+                fotos_tour.fotos_galeria,
+                fotos_tour.foto_principal,
+                hoteles_tour.hoteles,
 
-        // Ejecutar consulta con paginación
-        const [tours] = await db.query(queryTours, [publicados, limit, offset]);
+                MIN(CASE 
+                    WHEN filtros.filtro = 'Prioridad' THEN CAST(filtros.valor AS UNSIGNED)
+                    ELSE 127 
+                END) AS prioridad,
 
+                GROUP_CONCAT(
+                    DISTINCT CASE 
+                    WHEN filtros.filtro = 'Prioridad' THEN filtros.valor 
+                    ELSE filtros.filtro 
+                    END 
+                    ORDER BY filtros.filtro ASC
+                ) AS filtros
+
+                FROM tours t
+                LEFT JOIN fotos_tour  ON t.id_tour = fotos_tour.id_tour
+                LEFT JOIN hoteles_tour ON t.id_tour = hoteles_tour.id_tour
+                LEFT JOIN filtros      ON t.id_tour = filtros.id_tour
+                WHERE t.publicado = 1 AND t.mas_barato = 1
+                GROUP BY t.id_tour
+                ORDER BY prioridad ASC, t.nombre_tour ASC;
+            `;
+
+
+        const [tours] = await db.query(queryTours, [publicados, Number(limit)||50, Number(offset)||0]);
+// ---------------- 
         if (tours.length === 0) return null;
 
         // 2. Obtener todos los tour_descriptions que coincidan con los tour_code obtenidos
