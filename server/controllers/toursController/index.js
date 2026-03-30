@@ -1702,7 +1702,7 @@ actualizarFotoPrincipal = async (req, res) => {
         'Los más solicitados', 'Tendencia 2025', 'Londres', 'Madrid', 'Amsterdam',
         'Ciudades Imperiales en Europa', 'Noruega', 'Finlandia', 'Asia', 'África', 
         'Nórdicos', 'Bélgica', 'Praga', 'Croacia', 'Los Balcanes', 'Gran Bretaña', 
-        'Escocia', 'Grecia', 'Egipto', 'Marruecos', 'Dubai', 'Turquía','Prioridad'
+        'Escocia', 'Grecia', 'Egipto', 'Marruecos', 'Dubai', 'Turquía','Prioridad','Lujo'
     ];
 
     // Obtener los encabezados de la primera fila
